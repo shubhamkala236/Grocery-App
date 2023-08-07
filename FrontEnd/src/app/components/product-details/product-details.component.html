@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <div class="image-container">
+                <img class="img-fluid img-thumbnail m-4" src={{imageUrl}} alt="Image">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-start">
+            <div class="text-center">
+                <h5>{{productName}}</h5>
+            </div>
+        </div>
+        <div *ngIf="isOutOfStock" class="col">
+            <i class="bi bi-x-circle alert alert-danger p-2"> OUT OF STOCK</i>
+        </div>
+        <div *ngIf="userLogin() && !isOutOfStock" class="col text-end">
+            <div class="productsDetails text-center">
+                <div class="counter">
+                    <button [disabled]="count==1" class="btn btn-primary" (click)="decrement()">-</button>
+                    <span class="mx-2">{{ count }}</span>
+                    <button [disabled]="quantity<=count" class="btn btn-primary me-2" (click)="increment()">+</button>
+                    <button (click)="addToCart()" class="btn btn-danger"><i class="bi bi-cart2"></i></button>
+                </div>
+                  
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-6 text-start">
+            <div class="text-center">
+                <h6><i class="bi bi-currency-rupee"></i>{{productPrice}}</h6>
+            </div>
+        </div>
+      
+    </div>
+    <div class="row">
+        <div class="col-6 text-start">
+            <div class="text-center text">
+                <div class="discount">FLAT {{productDiscount}}% Off</div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row mt-3 reviews-list">
+        <h5>Reviews</h5>
+        <hr>
+        <ul>
+            <div *ngFor="let review of allReviews" class="reviews-container row">
+                <div class="review-container p-2 col-5 my-2">
+                    <div class="row">
+                        <i class="bi bi-person"> {{review.userName}}</i>
+                        <i class="star bi bi-star-fill"> {{review.rating}}</i>
+                        <li class="list-unstyled">{{review.comment}}</li>
+                    </div>
+                </div>
+            </div>
+                    
+        </ul>
+    </div>
+    <div *ngIf="userLogin()" class="add-review mt-3">
+        <form class="row" [formGroup]="reviewForm" (ngSubmit)="submitReview(reviewForm)">
+            <div class="form-group col-1">
+                Rating
+                <select class="form-select" formControlName="rating" aria-label="Default select example">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  
+            </div>
+            <div class="form-group col">
+              <label for="exampleInputEmail1">Add Comment</label>
+              <input type="text" class="form-control" formControlName="comment" id="exampleInputEmail1" placeholder="">
+              <div *ngIf="!comment?.valid && (comment?.dirty || comment?.touched)" class="text-start" >
+                <div *ngIf="comment?.errors?.['required']" style="color: red;">This field is Required for submitting review.</div>
+              </div>
+              <div *ngIf="!rating?.valid && (rating?.dirty || rating?.touched)" class="text-start" >
+                <div *ngIf="rating?.errors?.['required']" style="color: red;">Add Rating for submitting review.</div>
+              </div>
+            </div>
+            <div class="row my-3">
+                <div class="col">
+                    <button [disabled]="!reviewForm.valid" type="submit" class="btn btn-primary col-2">Submit</button>
+                </div>
+            </div>
+
+                
+        </form>
+            
+    </div>
+            
+
+</div>

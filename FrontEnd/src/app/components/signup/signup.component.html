@@ -1,0 +1,64 @@
+<section class="vh-100" style="background-color:rgb(128, 128, 128,0.2);">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <form [formGroup]="SignupForm" (ngSubmit)="registerUserSubmitted(SignupForm)" class="card-body p-5 text-center">
+  
+              <h2 class="mb-5">SignUp</h2>
+
+              <div class="form-outline mb-4">
+                <input type="text" formControlName="name" placeholder="Full Name" class="form-control form-control-md" />
+                <div *ngIf="!name?.valid && (name?.dirty || name?.touched)" class="text-start" >
+                  <div *ngIf="name?.errors?.['required']" style="color: red;">This field is Required.</div>
+                  <div *ngIf="name?.errors?.['maxlength']" style="color: red;">Max Length can be only 50.</div>
+                  <div *ngIf="name?.errors?.['minlength']" style="color: red;">Min Length can be only 3.</div>
+                  <div *ngIf="name?.errors?.['pattern']" style="color: red;">Name can only be alphabets.</div>
+                </div>
+              </div>
+              
+              <div class="form-outline mb-4">
+                <input type="email" formControlName="email" placeholder="Email" class="form-control form-control-md" />
+                <div *ngIf="!email?.valid && (email?.dirty || email?.touched)" class="text-start" >
+                  <div *ngIf="email?.errors?.['required']" style="color: red;">This field is Required.</div>
+                  <div *ngIf="email?.errors?.['pattern']" style="color: red;">Please write a valid email.</div>
+                </div>
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input formControlName="phone" placeholder="Phone Number" class="form-control form-control-md" />
+                <div *ngIf="!phone?.valid && (phone?.dirty || phone?.touched)" class="text-start" >
+                  <div *ngIf="phone?.errors?.['required']" style="color: red;">This field is Required.</div>
+                  <div *ngIf="phone?.errors?.['minlength']" style="color: red;">Min Length can be only 10</div>
+                  <div *ngIf="phone?.errors?.['maxlength']" style="color: red;">Max Length can be only 10</div>
+                  <div *ngIf="phone?.errors?.['pattern']" style="color: red;">Only numberic values allowed.</div>
+                </div>
+              </div>
+              
+              <div class="form-outline mb-4">
+                <input type="password" formControlName="password" placeholder="Enter your password" class="form-control form-control-md" />
+                <div *ngIf="!password?.valid && (password?.dirty || password?.touched)" class="text-start" >
+                  <div *ngIf="password?.errors?.['required']" style="color: red;">This field is Required.</div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" class="form-control form-control-md" />
+                <div *ngIf="!confirmPassword?.valid && (confirmPassword?.dirty || confirmPassword?.touched)" class="text-start" >
+                  <div *ngIf="confirmPassword?.errors?.['required']" style="color: red;">This field is Required.</div>
+                </div>
+                <div *ngIf="confirmPassword?.value !== password?.value && confirmPassword?.touched" style="color: red;" class="text-start">Passwords do not match.</div>
+                
+              </div>
+                    
+  
+  
+              <button [disabled]="!SignupForm.valid" class="btn btn-primary btn-lg btn-block" type="submit">SignUp</button>
+              <hr class="my-4">
+              <a class="text-decoration-none" routerLink="/login">Already user, Login now</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

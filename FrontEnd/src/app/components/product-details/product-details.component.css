@@ -1,0 +1,15 @@
+.discount{
+    font-size: small;
+    color: grey;
+}
+
+img{
+    height: 10rem;
+    width: 10rem;
+}
+
+.review-container{
+    background-color: rgb(128, 128, 128,0.2);
+    border-radius: 1.5rem;
+}
+

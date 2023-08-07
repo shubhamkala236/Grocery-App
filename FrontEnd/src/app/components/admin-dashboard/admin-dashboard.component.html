@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="table-container">
+      <div class="search-category row my-3">
+        <div class="dropdown col">
+          <select [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)" class="custom-select">
+             <option selected>Select Category</option>
+             <option selected value="All">All</option>
+             <option *ngFor="let product of filteredProducts" [value]="product.category">{{product.category}}</option>
+           </select>
+         </div>
+        <div class="input-group rounded col">
+          <input [(ngModel)]="searchTerm" (input)="search()" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+          <span class="input-group-text border-0" id="search-addon">
+            <i class="bi bi-search"></i>
+          </span>
+        </div>
+      </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th (click)="sort('name')" scope="col">Product</th>
+                <th scope="col">Description</th>
+                <th (click)="sort('price')" scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of filteredProducts | paginate:{ itemsPerPage: 4, currentPage: page }">
+                <td><div class="mt-5"><strong>{{product.productName}}</strong></div></td>
+                <td><div class="mt-5">{{product.description}}</div></td>
+                <td><div class="mt-5"><i class="bi bi-currency-rupee">{{product.price}}</i></div></td>
+                <td><img class="img-fluid img-thumbnail" src={{product.imageUrl}} alt="image"></td>
+                <td>
+                  <div class="mt-5">
+                    <button (click)="editProduct(product.productId)" class="btn btn-primary col me-3 px-4">Edit</button>
+                    <button (click)="deleteProduct(product.productId)" class="btn btn-danger col px-3">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+      </div>
+      <div class="text-center">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+</div>

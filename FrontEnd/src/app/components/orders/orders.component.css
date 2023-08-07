@@ -1,0 +1,13 @@
+li{
+    background-color: rgb(128, 128, 128,0.1);
+    border-radius: 1rem;
+}
+
+img{
+    height: 10rem;
+    width: 10rem;
+}
+
+.uniqueOrderId{
+    font-size: small;
+}

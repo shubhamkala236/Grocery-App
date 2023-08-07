@@ -1,0 +1,50 @@
+<div class="dashboard container">
+    <div class="row my-4">
+        <div class="dropdown col">
+           <select [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)" class="custom-select">
+              <option selected>Select Category</option>
+              <option selected value="All">All</option>
+              <option *ngFor="let product of filteredProducts" [value]="product.category">{{product.category}}</option>
+            </select>
+          </div>
+          
+          <div class="input-group rounded col">
+            <input [(ngModel)]="searchTerm" (input)="search()" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
+    </div>
+    <div class="m-3 m-sm-auto text-center">
+        <table class="table table-striped table-bordered border-black">
+            <thead>
+              <tr>
+                <th (click)="sort('name')" scope="col">Product <i class="bi bi-arrow-down-up"></i></th>
+                <th scope="col">Description</th>
+                <th (click)="sort('price')" scope="col">Price <i class="bi bi-arrow-down-up"></i></th>
+                <th scope="col">Image</th>
+                <!-- <th *ngIf="showDetailsColumn" scope="col">Details</th> -->
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of filteredProducts | paginate:{ itemsPerPage: 4, currentPage: page }">
+                <td scope="row">{{product.productName}}</td>
+                <td>{{product.description}}</td>
+                <td><i class="bi bi-currency-rupee">{{product.price}}</i></td>
+                <td>
+                  <img [src]="product.imageUrl" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+                </td>
+                <!-- <td *ngIf="showDetailsColumn"> -->
+                <td>
+                  <button (click)="viewProduct(product.productId)" class="btn btn-secondary"><i class="bi bi-eyeglasses"></i>
+                  </button>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+    
+</div>

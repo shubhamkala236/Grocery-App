@@ -1,0 +1,38 @@
+<nav class="navbar navbar-light bg-success-subtle">
+  <div class="navbar-brand ms-3" routerLink="dashboard" *ngIf="!adminLogin()">
+    <h5 class="nav-link">Grocery App</h5>
+  </div>
+  <div class="navbar-brand pe-auto ms-3" routerLink="adminDashboard" *ngIf="adminLogin()">
+    <h5 class="nav-link">Grocery App</h5>
+  </div>
+  <div class="navbar-content row me-4">
+    <!-- anonymous users -->
+    <div class="col" routerLink="login" *ngIf="!userLogin() && !adminLogin()">
+      Login
+    </div>
+    <div class="col" routerLink="signup" *ngIf="!userLogin() && !adminLogin()">
+      SignUp
+    </div>
+    <!-- logged in users  -->
+    <div class="col" *ngIf="isLoggedIn()">
+      {{userName}}
+    </div>
+    <div class="col" *ngIf="userLogin()" routerLink="myCart">
+      ViewCart
+    </div>
+    <div class="col" *ngIf="userLogin()" routerLink="myOrders">
+      MyOrders
+    </div>
+    <!-- admin users  -->
+    <div class="col" *ngIf="adminLogin()" routerLink="topOrders">
+      TopOrders
+    </div>
+    <div class="col" *ngIf="adminLogin()" routerLink="addProduct">
+      AddProduct
+    </div>
+    <div (click)="logOut()" class="col" *ngIf="isLoggedIn()">
+      Signout
+    </div>
+
+  </div>
+</nav>
