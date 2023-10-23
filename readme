@@ -21,6 +21,6 @@ DataBase ---> MSSQL
 5. Change the name of server in appsettings.json file in Backend (ControllerLayer) to your local server name.
 
 
------------------#h1 VIDEO DEMO ---------------->
+-----------------VIDEO DEMO ---------------->
 https://github.com/shubhamkala236/Grocery-App/assets/84154821/2bd146a5-5b59-4c53-acc6-4913d3941a13
 
