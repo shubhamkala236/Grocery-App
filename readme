@@ -19,3 +19,8 @@ DataBase ---> MSSQL
 3. If any error occurs due to version find the solution on web.
 4. You can also try by manually creating the table GroceryDb and then run the scripts to get Data and Schema from the script.
 5. Change the name of server in appsettings.json file in Backend (ControllerLayer) to your local server name.
+
+
+-----------------#h1 VIDEO DEMO ---------------->
+https://github.com/shubhamkala236/Grocery-App/assets/84154821/2bd146a5-5b59-4c53-acc6-4913d3941a13
+
